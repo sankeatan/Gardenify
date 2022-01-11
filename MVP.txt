@@ -1,0 +1,3 @@
+
+Our MVP would be the spotify search bar that pulls up details about the song.
+We would have a usable search bar and details that pop up as the user selects the specified song.
