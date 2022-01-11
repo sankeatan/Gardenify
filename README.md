@@ -1,7 +1,7 @@
 # Project-1
 
 #Acceptance Criteria
-GIVEN – a Music Dashboard.
+GIVEN – a Music Dashboard
 WHEN - user searches a song, artist, or album.
 THEN - user is shown searched topic as well as a limited amount of relevant data ex: album cover, related songs, lyrics as well as an option to play the listed song.
 WHEN - user clicks the play button.
