@@ -1,12 +1,13 @@
 # Project-1
 
 #Acceptance Criteria
-GIVEN – a Music Dashboard
-WHEN - user searches a song, artist, or album.
-THEN - user is shown searched topic as well as a limited amount of relevant data ex: album cover, related songs, lyrics as well as an option to play the listed song.
-WHEN - user clicks the play button.
-THEN - the song listed will start to play.
-WHEN - user clicks on the more info link under displayed data.
-THEN - user is taken to a second page which includes more detailed info on the topic searched.
-WHEN - user logs into Spotify through our app.
-THEN - the user’s playlist/recently played songs will display on the bottom half on the initial page.
+GIVEN – a Planting/Gardening Guide
+WHEN - user searches their zipcode.
+THEN - user is given detailed info on which plants would be best to plant, based upon their geolocation and the season.
+WHEN - user clicks on specific plant from the given data.
+THEN - the user will be taken to an additional page with more detailed content about the plant that they clicked on.
+If Possible
+WHEN - the user is able to search for a specific season related to their gelocation 
+THEN - the relevant data will be displayed for the selected season
+WHEN - user is able to store a gardening list for any season
+THEN - the user will be able to have saved season lists for them to pull up as needed.
