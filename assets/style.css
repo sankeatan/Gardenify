@@ -35,16 +35,104 @@ h6 {
     font-size: 0.8rem;
     margin-top: 30px;
   }
+  
+  .marketing-site-footer-bottom {
+    background-color: rgba(29, 27, 27, 0.705);
+    padding: 1rem 0;
+    position:absolute;
+    bottom: 0;
+    width:100%;
+    height: 111px;
+    border-top: 1px solid#cacaca;
+  }
+  
+  .marketing-site-footer-bottom p,
+  .marketing-site-footer-bottom .menu {
+    margin-bottom: 0;
+  }
+  
+  .marketing-site-footer-bottom .marketing-site-footer-bottom-links {
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  
+  .marketing-site-footer-bottom .marketing-site-footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.644);
+  }
 
-  .work-feature-block {
+  .marketing-site-footer-bottom-links{
+    position: relative;
+    bottom: 30px;
+  }
+  
+  @media screen and (max-width: 63.9375em) {
+    .marketing-site-footer-bottom .marketing-site-footer-bottom-links {
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+    }
+  }
+  
+  @media screen and (max-width: 63.9375em) {
+    .marketing-site-footer-bottom {
+      text-align: center;
+    }
+  }
+
+  .custom-copyright{
+    color: rgba(255, 255, 255, 0.644);
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.work-feature-block {
     padding: 10px 0;
     border-top: 1px solid #cacaca;
     border-bottom: 1px solid #cacaca;
   }
   
-  .work-feature-block-image {
+.work-feature-block-image {
     display: block;
     margin: auto;
     padding: 10px 0;
   }
   
+.work-feature-block-header {
+    position:relative;
+    left: 800px;
+    bottom: 350px;
+    width: 400px;
+}
+
+.custom-row {
+    border-bottom: 0px;
+}
+
+#feature-p {
+    position:relative;
+    left: 650px;
+    bottom: 350px;
+    width: 750px;
+}
+
+.work-feature-block-image {
+    position: relative;
+    right: 620px;
+    top: 50px;
+    width: 500px;
+}
+
+#details-head {
+    position:relative;
+    left: 830px;
+    bottom: 350px;
+    width: 400px;
+}
+
+#details-p {
+    position:relative;
+    left: 650px;
+    bottom: 350px;
+    width: 750px;
+}

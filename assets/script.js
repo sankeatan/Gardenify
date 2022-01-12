@@ -20,11 +20,12 @@ function getApi(url) {
       .then(function (data) {
         // Make sure to look at the response in the console and read how 404 response is structured.
         console.log(data);
-        plantData = data.data[0];
-        console.log(plantData);
+        plantData = data.data[0].attributes
+        console.log();
         displayInfo();
       });
   }
+ 
 
  function plantSearch () {
    //e.preventDefault();
@@ -34,8 +35,10 @@ function getApi(url) {
  }
 
  function displayInfo () {
-   $('#sci-name').text('Scientific Name: '+ plantData.attributes.binomial_name).show();
-   $('#plant-name').text('Common Name:'+ plantData.attributes.name).show();
+   $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
+   $('#plant-name').text('Common Name:'+ plantData.name).show();
+   $('#plant-title').text(plantData.name);
+   //document.getElementById("image").src = main_img_path
    //veggieInfoEl.append('<li>').text('Sun Requirements: '+plantData.attributes.sun_requirements);
 
  }
