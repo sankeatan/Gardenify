@@ -1,8 +1,7 @@
 var requestURL = '';
-var srchBtn =  $('.searchBt');
-var plantName = $('.searchField').val();
+var srchBtn =  $('#searchBt');
+var plantName = $('#searchField').val();
 var plantData = [];
-
 
 
 
@@ -20,11 +19,18 @@ function getApi(url) {
       .then(function (data) {
         // Make sure to look at the response in the console and read how 404 response is structured.
         console.log(data);
-        plantData = data[0];
-        console.log(plantData);
+        plantData = data.data[0].attributes
+        plantData.name
+        console.log();
+        displayInfo();
       });
   }
 
+  function displayInfo() {
+     document.getElementById("plantDescName").textContent = plantData.name + " Info"
+     document.getElementById("image").src = main_img_path
+    
+  }
  
 
  function plantSearch () {

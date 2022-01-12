@@ -1,0 +1,138 @@
+:root {
+    --background-color: rgba(53, 47, 47, 0);
+}
+
+body {
+    background-color: rgba(29, 27, 27, 0.705);
+}
+
+.button {
+    padding: 2px;
+}
+
+.top-bar {
+    background-color: rgba(29, 27, 27, 0.705);
+}
+
+.top-bar-title {
+    margin-left: 40px;
+    color: rgba(255, 255, 255, 0.644)
+}
+
+h6 {
+    margin-left: -30px;
+}
+
+.input-group-rounded .input-group-field {
+    border-radius: 5000px 0 0 5000px;
+    padding-left: 1rem;
+    margin-left: 1200px;
+    margin-top: 30px;
+  }
+  
+  .input-group-rounded .input-group-button .button {
+    border-radius: 0 5000px 5000px 0;
+    font-size: 0.8rem;
+    margin-top: 30px;
+  }
+  
+  .marketing-site-footer-bottom {
+    background-color: rgba(29, 27, 27, 0.705);
+    padding: 1rem 0;
+    position:absolute;
+    bottom: 0;
+    width:100%;
+    height: 111px;
+    border-top: 1px solid#cacaca;
+  }
+  
+  .marketing-site-footer-bottom p,
+  .marketing-site-footer-bottom .menu {
+    margin-bottom: 0;
+  }
+  
+  .marketing-site-footer-bottom .marketing-site-footer-bottom-links {
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  
+  .marketing-site-footer-bottom .marketing-site-footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.644);
+  }
+
+  .marketing-site-footer-bottom-links{
+    position: relative;
+    bottom: 30px;
+  }
+  
+  @media screen and (max-width: 63.9375em) {
+    .marketing-site-footer-bottom .marketing-site-footer-bottom-links {
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+    }
+  }
+  
+  @media screen and (max-width: 63.9375em) {
+    .marketing-site-footer-bottom {
+      text-align: center;
+    }
+  }
+
+  .custom-copyright{
+    color: rgba(255, 255, 255, 0.644);
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.work-feature-block {
+    padding: 10px 0;
+    border-top: 1px solid #cacaca;
+    border-bottom: 1px solid #cacaca;
+  }
+  
+.work-feature-block-image {
+    display: block;
+    margin: auto;
+    padding: 10px 0;
+  }
+  
+.work-feature-block-header {
+    position:relative;
+    left: 800px;
+    bottom: 350px;
+    width: 400px;
+}
+
+.custom-row {
+    border-bottom: 0px;
+}
+
+#feature-p {
+    position:relative;
+    left: 650px;
+    bottom: 350px;
+    width: 750px;
+}
+
+.work-feature-block-image {
+    position: relative;
+    right: 620px;
+    top: 50px;
+    width: 500px;
+}
+
+#details-head {
+    position:relative;
+    left: 830px;
+    bottom: 350px;
+    width: 400px;
+}
+
+#details-p {
+    position:relative;
+    left: 650px;
+    bottom: 350px;
+    width: 750px;
+}
