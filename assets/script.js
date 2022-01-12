@@ -1,10 +1,10 @@
 var requestURL = '';
-var srchBtn =  $('.searchBt');
-var plantName = $('.searchField').val();
+var srchBtn =  $('#searchBt');
+var plantName = $('#searchField').val();
 var plantData = [];
-
-
-
+var veggieInfoEl = $('#veg-info');
+$('#sci-name').hide();
+$('#plant-name').hide();
 
 function getApi(url) {
     fetch(url)
@@ -20,18 +20,24 @@ function getApi(url) {
       .then(function (data) {
         // Make sure to look at the response in the console and read how 404 response is structured.
         console.log(data);
-        plantData = data[0];
+        plantData = data.data[0];
         console.log(plantData);
+        displayInfo();
       });
   }
-
- 
 
  function plantSearch () {
    //e.preventDefault();
    plantName = 'pepper';//$('.searchField').val();
    requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
    getApi(requestURL);
+ }
+
+ function displayInfo () {
+   $('#sci-name').text('Scientific Name: '+ plantData.attributes.binomial_name).show();
+   $('#plant-name').text('Common Name:'+ plantData.attributes.name).show();
+   //veggieInfoEl.append('<li>').text('Sun Requirements: '+plantData.attributes.sun_requirements);
+
  }
 
 plantSearch();
