@@ -10,6 +10,18 @@ var plantDesc = "";
 $('#sci-name').hide();
 $('#plant-name').hide();
 
+const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
+		"x-rapidapi-key": "b71a1c4a5bmshb848c727310c6bbp18da7cjsnbb90f586f1b4"
+	}
+};
+
+
 function getApi(url) {
     fetch(url)
       .then(function (response) {
@@ -46,8 +58,19 @@ function getApi(url) {
    $('#plant-title').text(plantData.name);
    $('#image').attr("src", imageData);
    $('#details-p').text(plantDesc)
-   
+   }
 
- }
+hardiSearch()
 
+
+function hardiSearch() {
+  inputUrl = settings.url + 76904;
+  console.log(inputUrl);
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+}
+ 
+ 
 srchBtn.on('click', plantSearch);
+
