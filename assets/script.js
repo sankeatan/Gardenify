@@ -7,9 +7,16 @@ var plantData = [];
 var veggieInfoEl = $('#veg-info');
 var imageData = "";
 var plantDesc = "";
-
+var sunReq = "";
+var sowMeth = "";
+var plantSpace = "";
+var growHeight = "";
 $('#sci-name').hide();
 $('#plant-name').hide();
+$('#sun-requirements').hide();
+$('#row-spacing').hide();
+$('#plant-height').hide();
+$('#sowing-method').hide();
 
 /* ############################# const settings ############################# */
 
@@ -34,6 +41,10 @@ function getApi(url) {
         plantData = data.data[0].attributes;
         imageData = plantData.main_image_path;
         plantDesc = plantData.description;
+        sunReq = plantData.sun_requirements;
+        sowMeth = plantData.sowing_method;
+        plantSpace = plantData.row_spacing;
+        growHeight = plantData.height;
         displayInfo();
       });
     }
@@ -45,18 +56,22 @@ function getApi(url) {
    console.log(plantName);
    requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter=';
    getApi(requestURL);
-   hardiSearch()
-  }
-  /* ############################# display info ############################# */
-  function displayInfo () {
-    $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
-    $('#plant-name').text('Common Name:'+ plantData.name).show();
-    $('#plant-title').text(plantData.name);
-    $('#image').attr("src", imageData);
-    $('#details-p').text(plantDesc)
-  }
-  
-  
+   hardiSearch();
+
+ }
+ /* ############################# display info ############################# */
+ function displayInfo () {
+   $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
+   $('#plant-name').text('Common Name:'+ plantData.name).show();
+   $('#plant-title').text(plantData.name);
+   $('#image').attr("src", imageData);
+   $('#details-p').text(plantDesc);
+   $('#sun-requirement').text('Sun Requirements: ' + sunReq).show();
+   $('#sowing-method').text('Sowing Method: ' + sowMeth).show();
+   $('#row-spacing').text('Plant Spacing: ' + plantSpace).show();
+   $('#plant-height').text('Fully Grown Height: ' + growHeight).show();
+   $('#details-p').text(plantDesc)
+   }
 
 function hardiSearch() {
   var input = $('.searchField').val();
