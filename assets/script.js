@@ -1,6 +1,8 @@
+/* ############################# setting global variables ############################# */
+
 var requestURL = '';
-var srchBtn = $('#searchBt');
-var plantName = $('#searchField').val();
+var srchBtn =  $('.searchBt');
+var plantName = $('.searchField').val();
 var plantData = [];
 var veggieInfoEl = $('#veg-info');
 var imageData = "";
@@ -15,6 +17,21 @@ $('#sun-requirements').hide();
 $('#row-spacing').hide();
 $('#plant-height').hide();
 $('#sowing-method').hide();
+
+/* ############################# const settings ############################# */
+
+const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
+		"x-rapidapi-key": "b71a1c4a5bmshb848c727310c6bbp18da7cjsnbb90f586f1b4"
+	}
+};
+
+/* ############################# getting api ############################# */
 
 function getApi(url) {
     fetch(url)
@@ -37,19 +54,19 @@ function getApi(url) {
         sowMeth = plantData.sowing_method;
         plantSpace = plantData.row_spacing;
         growHeight = plantData.height;
-        console.log();
         displayInfo();
       });
     }
     
-    
-    function plantSearch () {
-   //e.preventDefault();
-   plantName = 'pepper';//$('.searchField').val();
+/* ############################# plant search ############################# */
+  function plantSearch (e) {
+   e.preventDefault();
+   plantName = $('.searchField').val();
+   console.log(plantName);
    requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
    getApi(requestURL);
  }
-
+ /* ############################# display info ############################# */
  function displayInfo () {
    $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
    $('#plant-name').text('Common Name:'+ plantData.name).show();
@@ -60,26 +77,21 @@ function getApi(url) {
    $('#sowing-method').text('Sowing Method: ' + sowMeth).show();
    $('#row-spacing').text('Plant Spacing: ' + plantSpace).show();
    $('#plant-height').text('Fully Grown Height: ' + growHeight).show();
-   
-   
-
- }
-
-plantSearch();
- //srchBtn.on('click', plantSearch);
-
- /*data we want: 
- 
- name:
- scientific name:
- img:
- description:
- sun req:
- spacing:
- sowing method
+   $('#details-p').text(plantDesc)
+   }
 
 
+hardiSearch()
+
+
+function hardiSearch() {
+  inputUrl = settings.url + 76904;
+  console.log(inputUrl);
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+}
  
  
- 
- */
+srchBtn.on('click', plantSearch);
+
