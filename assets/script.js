@@ -23,7 +23,6 @@ function getApi(url) {
         console.log(data);
         plantData = data.data[0].attributes;
         imageData = plantData.main_image_path;
-        console.log(imageData);
         console.log();
         displayInfo();
       });
@@ -42,7 +41,7 @@ function getApi(url) {
    $('#plant-name').text('Common Name:'+ plantData.name).show();
    $('#plant-title').text(plantData.name);
    $('#image').attr("src", imageData);
-   //document.getElementById("image").src = main_img_path
+   
    //veggieInfoEl.append('<li>').text('Sun Requirements: '+plantData.attributes.sun_requirements);
 
  }
