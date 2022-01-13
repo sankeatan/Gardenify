@@ -1,6 +1,8 @@
 var requestURL = '';
-var srchBtn =  $('#searchBt');
-var plantName = $('#searchField').val();
+var srchBtn =  $('.searchBt');
+console.log(srchBtn);
+var plantName = $('.searchField').val();
+console.log(plantName);
 var plantData = [];
 var veggieInfoEl = $('#veg-info');
 var imageData = "";
@@ -25,15 +27,15 @@ function getApi(url) {
         plantData = data.data[0].attributes;
         imageData = plantData.main_image_path;
         plantDesc = plantData.description;
-        console.log();
         displayInfo();
       });
     }
     
     
-    function plantSearch () {
-   //e.preventDefault();
-   plantName = 'pepper';//$('.searchField').val();
+  function plantSearch (e) {
+   e.preventDefault();
+   plantName = $('.searchField').val();
+   console.log(plantName);
    requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
    getApi(requestURL);
  }
@@ -45,25 +47,7 @@ function getApi(url) {
    $('#image').attr("src", imageData);
    $('#details-p').text(plantDesc)
    
-   //veggieInfoEl.append('<li>').text('Sun Requirements: '+plantData.attributes.sun_requirements);
 
  }
 
-plantSearch();
- //srchBtn.on('click', plantSearch);
-
- /*data we want: 
- 
- name:
- scientific name:
- img:
- description:
- sun req:
- spacing:
- sowing method
-
-
- 
- 
- 
- */
+srchBtn.on('click', plantSearch);
