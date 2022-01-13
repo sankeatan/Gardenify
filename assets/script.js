@@ -6,6 +6,7 @@ console.log(plantName);
 var plantData = [];
 var veggieInfoEl = $('#veg-info');
 var imageData = "";
+var plantDesc = "";
 $('#sci-name').hide();
 $('#plant-name').hide();
 
@@ -25,6 +26,7 @@ function getApi(url) {
         console.log(data);
         plantData = data.data[0].attributes;
         imageData = plantData.main_image_path;
+        plantDesc = plantData.description;
         displayInfo();
       });
     }
@@ -43,6 +45,7 @@ function getApi(url) {
    $('#plant-name').text('Common Name:'+ plantData.name).show();
    $('#plant-title').text(plantData.name);
    $('#image').attr("src", imageData);
+   $('#details-p').text(plantDesc)
    
 
  }
