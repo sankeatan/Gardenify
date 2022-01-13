@@ -1,14 +1,16 @@
+/* ############################# setting global variables ############################# */
+
 var requestURL = '';
 var srchBtn =  $('.searchBt');
-console.log(srchBtn);
 var plantName = $('.searchField').val();
-console.log(plantName);
 var plantData = [];
 var veggieInfoEl = $('#veg-info');
 var imageData = "";
 var plantDesc = "";
 $('#sci-name').hide();
 $('#plant-name').hide();
+
+/* ############################# const settings ############################# */
 
 const settings = {
 	"async": true,
@@ -21,6 +23,7 @@ const settings = {
 	}
 };
 
+/* ############################# getting api ############################# */
 
 function getApi(url) {
     fetch(url)
@@ -43,7 +46,7 @@ function getApi(url) {
       });
     }
     
-    
+/* ############################# plant search ############################# */
   function plantSearch (e) {
    e.preventDefault();
    plantName = $('.searchField').val();
@@ -51,7 +54,7 @@ function getApi(url) {
    requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
    getApi(requestURL);
  }
-
+ /* ############################# display info ############################# */
  function displayInfo () {
    $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
    $('#plant-name').text('Common Name:'+ plantData.name).show();
