@@ -7,21 +7,13 @@ var plantData = [];
 var veggieInfoEl = $('#veg-info');
 var imageData = "";
 var plantDesc = "";
+
 $('#sci-name').hide();
 $('#plant-name').hide();
 
 /* ############################# const settings ############################# */
 
-const settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
-		"x-rapidapi-key": "b71a1c4a5bmshb848c727310c6bbp18da7cjsnbb90f586f1b4"
-	}
-};
+
 
 /* ############################# getting api ############################# */
 
@@ -51,26 +43,37 @@ function getApi(url) {
    e.preventDefault();
    plantName = $('.searchField').val();
    console.log(plantName);
-   requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
+   requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter=';
    getApi(requestURL);
- }
- /* ############################# display info ############################# */
- function displayInfo () {
-   $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
-   $('#plant-name').text('Common Name:'+ plantData.name).show();
-   $('#plant-title').text(plantData.name);
-   $('#image').attr("src", imageData);
-   $('#details-p').text(plantDesc)
-   }
-
-hardiSearch()
-
+   hardiSearch()
+  }
+  /* ############################# display info ############################# */
+  function displayInfo () {
+    $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
+    $('#plant-name').text('Common Name:'+ plantData.name).show();
+    $('#plant-title').text(plantData.name);
+    $('#image').attr("src", imageData);
+    $('#details-p').text(plantDesc)
+  }
+  
+  
 
 function hardiSearch() {
-  inputUrl = settings.url + 76904;
-  console.log(inputUrl);
+  var input = $('.searchField').val();
+  const settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/" + input,
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
+      "x-rapidapi-key": "b71a1c4a5bmshb848c727310c6bbp18da7cjsnbb90f586f1b4"
+    }
+  };
+  
   $.ajax(settings).done(function (response) {
-    console.log(response);
+    console.log(response.hardiness_zone);
+    // $('#details-head').text(response.hardiness_zone)
   });
 }
  
