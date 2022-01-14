@@ -51,7 +51,6 @@ $('.main-carousel').slick({
   variableHeight: true
 });
 
-
 /* ############################# getting plant info ############################# */
 function getPlantApi(plantName) {
     var url = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
@@ -233,4 +232,11 @@ function zipInfo(zipCode) {
 }
 
 srchBtn.on('click', search);
+$(document).on('keypress',function(e) {
+  console.log('keypress');
+  if(e.which == 13) {
+      srchBtn.trigger('click');
+      console.log('enter');
+  }
+})
 
