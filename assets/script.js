@@ -4,6 +4,7 @@
 var requestURL = '';
 //search button and input field selectors
 var srchBtn =  $('.searchBt');
+var srchBtnZip =  $('.searchBtn');
 var plantName = $('.searchField').val();
 //plant object with empty key:value pairs
 var plantObject = {
@@ -45,7 +46,17 @@ function getApi(url) {
         displayInfo();
       });
     }
-    
+
+
+
+/* ############################# Zipcode Search ############################# */
+function zipSearch (e) {
+  e.preventDefault();
+  zipcode = $('.searchFieldZip').val();
+  console.log (zipcode)
+  hardiSearch()
+}
+
 /* ############################# plant search ############################# */
   function plantSearch (e) {
    e.preventDefault();
@@ -99,7 +110,8 @@ function getApi(url) {
         }
 /* ############################# hardiness zones ############################# */
 function hardiSearch() {
-  var input = $('.searchField').val();
+  var input = $('.searchFieldZip').val();
+  console.log (input)
   const settings = {
     "async": true,
     "crossDomain": true,
@@ -112,9 +124,11 @@ function hardiSearch() {
   };
   $.ajax(settings).done(function (response) {
     console.log(response.hardiness_zone);
-    // $('#details-head').text(response.hardiness_zone)
+    document.createElement("p")
+    $('#details-head').text(response.hardiness_zone)
   });
 }
   
 srchBtn.on('click', plantSearch);
+srchBtnZip.on('click', hardiSearch);
 
