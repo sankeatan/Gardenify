@@ -4,8 +4,7 @@
 var requestURL = '';
 //search button and input field selectors
 var srchBtn =  $('.searchBt');
-var srchBtnZip =  $('.searchBtn');
-var plantName = $('.searchField').val();
+var searchValue = $('.searchField').val();
 //plant object with empty key:value pairs
 var plantObject = {
    imageData : "",
@@ -16,6 +15,7 @@ var plantObject = {
    growHeight : ""
 };
 //empty global array to dump data
+var weatherData = [];
 var plantData = [];
 //selector for the info element
 var veggieInfoEl = $('#veg-info');
@@ -35,32 +35,18 @@ $('.main-carousel').slick({
   variableHeight: true
 });
 
-/* ############################# const settings ############################# */
-
-const settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
-		"x-rapidapi-key": "b71a1c4a5bmshb848c727310c6bbp18da7cjsnbb90f586f1b4"
-	}
-};
-
 $('#sun-requirements').hide();
 $('#row-spacing').hide();
 $('#plant-height').hide();
 $('#sowing-method').hide();
 
-/* ############################# getting api ############################# */
-function getApi(url) {
+/* ############################# getting plant info ############################# */
+function getPlantApi(plantName) {
+    var url = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
     fetch(url)
       .then(function (response) {
         console.log(response.status);
-        //  Conditional for the the response.status.
         if (response.status !== 200) {
-          // Place the response.status on the page.
           responseText.textContent = response.status;
         }
         return response.json();
@@ -71,35 +57,33 @@ function getApi(url) {
 
         console.log(data);
         
-        displayInfo();
+        displayPlantInfo();
       });
     }
 
-
-
-/* ############################# Zipcode Search ############################# */
-function zipSearch (e) {
+/* ############################# search ############################# */
+  function search (e) {
   e.preventDefault();
-  zipcode = $('.searchFieldZip').val();
-  console.log (zipcode)
-  hardiSearch()
-}
-
-/* ############################# plant search ############################# */
-  function plantSearch (e) {
-   e.preventDefault();
-   //getting the searched plant name
-   plantName = $('.searchField').val();
-   console.log(plantName);
-   //setting up request URL for api function
-   requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
-   getApi(requestURL);
-   //calling hardi search here until we can get a zipcode input
-   //hardiSearch();
+  searchValue = $('.searchField').val();
+  //checks to see if search field is a number
+  if (!isNaN(searchValue)) {
+  //checks to see if the search field is less than 5 characters
+    if (searchValue.length>5){
+      //**************** need to put a zip warning here ***************
+      return false;
+    }
+    //searchs for zip info
+    else {
+      zipInfo(searchValue);
+    }
+  }
+  else {
+    getPlantApi(searchValue);
+  }
  }
- /* ############################# display info ############################# */
- function displayInfo () {
-        //populating planet objet's keys
+ /* ############################# display plant info ############################# */
+ function displayPlantInfo () {
+        //populating planet object's keys
         plantObject.imageData = plantData.main_image_path;
         plantObject.plantDesc = plantData.description;
         plantObject.sunReq = plantData.sun_requirements;
@@ -136,14 +120,15 @@ function zipSearch (e) {
           $('#image').attr("src", plantObject.imageData);
           }
         }
-/* ############################# hardiness zones ############################# */
-function hardiSearch() {
-  var input = $('.searchFieldZip').val();
-  console.log (input)
+/* ############################# getting zip info ############################# */
+function zipInfo(zipCode) {
+  var openWeatherApiKey='4c94f4694462733770c73418781b71f1';
+
+  //hardiness zone fetch
   const settings = {
     "async": true,
     "crossDomain": true,
-    "url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/" + input,
+    "url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/" + zipCode,
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
@@ -155,9 +140,42 @@ function hardiSearch() {
     document.createElement("p")
     $('#details-head').text(response.hardiness_zone)
   });
-}
-  
-srchBtn.on('click', plantSearch);
 
-srchBtnZip.on('click', hardiSearch);
+  //open weather fetch
+  var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip='+zipCode+'&appid='+openWeatherApiKey;
+  fetch(geocodeUrl, {
+      method: 'GET', //GET is the default.
+      credentials: 'same-origin', // include, *same-origin, omit
+      redirect: 'follow', // manual, *follow, error
+  })
+      .then(function (response) {
+        //checking response before returing
+        if (response.status == 200) {
+        return response.json();
+        }
+      })
+      .then(function (data) {
+        //saves the geocode to a global array, and then sets the lat and long of the city
+        var geocodeData = data;
+        console.log(geocodeData);
+        var lat = geocodeData.lat;
+        var long = geocodeData.lon;
+        //uses lat and long to call for weather info
+        weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+long+'&units=imperial&appid='+ openWeatherApiKey;
+        fetch(weatherUrl, {
+        method: 'GET', //GET is the default.
+        credentials: 'same-origin', // include, *same-origin, omit
+        redirect: 'follow', // manual, *follow, error
+          })
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (data) {
+          //saves the weather data to global array
+          weatherData = data;
+          console.log(weatherData);
+          })
+      });
+}
+srchBtn.on('click', search);
 
