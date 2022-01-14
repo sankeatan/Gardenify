@@ -5,6 +5,11 @@ var requestURL = '';
 //search button and input field selectors
 var srchBtn =  $('.searchBt');
 var searchValue = $('.searchField').val();
+//weather card id hooks and default
+var temperature = $('#current-temp');
+temperature.text("Temp: \xB0F");
+var currentIcon = $('#current-icon');
+
 //plant object with empty key:value pairs
 var plantObject = {
    imageData : "",
@@ -17,6 +22,7 @@ var plantObject = {
 //empty global array to dump data
 var weatherData = [];
 var plantData = [];
+var frostData = [];
 //selector for the info element
 var veggieInfoEl = $('#veg-info');
 //hiding the info elemtns initially
@@ -141,8 +147,10 @@ function zipInfo(zipCode) {
     $('#details-head').text(response.hardiness_zone)
   });
 
-  //open weather fetch
+  //geocode and open weather fetch, then temperature stations fetch
   var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip='+zipCode+'&appid='+openWeatherApiKey;
+  var lat = 0;
+  var long = 0;
   fetch(geocodeUrl, {
       method: 'GET', //GET is the default.
       credentials: 'same-origin', // include, *same-origin, omit
@@ -158,10 +166,11 @@ function zipInfo(zipCode) {
         //saves the geocode to a global array, and then sets the lat and long of the city
         var geocodeData = data;
         console.log(geocodeData);
-        var lat = geocodeData.lat;
-        var long = geocodeData.lon;
+        lat = geocodeData.lat;
+        long = geocodeData.lon;
+
         //uses lat and long to call for weather info
-        weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+long+'&units=imperial&appid='+ openWeatherApiKey;
+        var weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+long+'&units=imperial&appid='+ openWeatherApiKey;
         fetch(weatherUrl, {
         method: 'GET', //GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
@@ -175,7 +184,41 @@ function zipInfo(zipCode) {
           weatherData = data;
           console.log(weatherData);
           })
-      });
+        
+          //getting temperature stations for frost dates
+        var tempStationUrl = 'https://api.farmsense.net/v1/frostdates/stations/?lat='+lat+'&lon='+long;
+        tempStationsData = [];
+        fetch(tempStationUrl, {
+          method: 'GET', //GET is the default.
+          credentials: 'same-origin', // include, *same-origin, omit
+          redirect: 'follow', // manual, *follow, error
+          })
+            .then(function (response) {
+              if (response.status == 200) {
+              return response.json();
+              }})
+            .then(function (data) {
+            var tempStationsData = data;
+            console.log(tempStationsData);
+            var stationID = tempStationsData[0].id;
+            var frostDatesUrl = 'https://api.farmsense.net/v1/frostdates/probabilities/?station='+stationID+'&season=1';
+            fetch(frostDatesUrl, {
+              method: 'GET', //GET is the default.
+              credentials: 'same-origin', // include, *same-origin, omit
+              redirect: 'follow', // manual, *follow, error
+            })
+              .then(function (response) {
+              if (response.status == 200) {
+              return response.json();
+              }})
+              .then(function (data) {
+              frostData = data;
+              console.log(frostData);
+              console.log(frostData[0].prob_90);
+            })
+  });
+})
 }
+
 srchBtn.on('click', search);
 
