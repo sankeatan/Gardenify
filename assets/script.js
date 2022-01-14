@@ -56,7 +56,7 @@ function getApi(url) {
    requestURL = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
    getApi(requestURL);
    //calling hardi search here until we can get a zipcode input
-   hardiSearch();
+   //hardiSearch();
  }
  /* ############################# display info ############################# */
  function displayInfo () {
@@ -64,6 +64,7 @@ function getApi(url) {
         plantObject.imageData = plantData.main_image_path;
         plantObject.plantDesc = plantData.description;
         plantObject.sunReq = plantData.sun_requirements;
+        console.log(plantData.sun_requirements);
         plantObject.sowMeth = plantData.sowing_method;
         plantObject.plantSpace = plantData.row_spacing;
         plantObject.growHeight = plantData.height;
@@ -83,10 +84,10 @@ function getApi(url) {
           if ( plantObject.plantDesc != null) {
           $('#details-p').text(plantObject.plantDesc);
           }
-          if ( plantObject.sunReq != null) {
+          if ( plantObject.sunReq != '') {
           $('#sun-requirement').text('Sun Requirements: ' + plantObject.sunReq).show();
           }
-          if ( plantObject.sowMeth != null) {
+          if ( plantObject.sowMeth != '') {
           $('#sowing-method').text('Sowing Method: ' + plantObject.sowMeth + '.').show();
           }
           if ( plantObject.growHeight != null) {
