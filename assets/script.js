@@ -4,6 +4,7 @@
 var requestURL = '';
 //search button and input field selectors
 var srchBtn =  $('.searchBt');
+var srchBtnZip =  $('.searchBtn');
 var plantName = $('.searchField').val();
 //plant object with empty key:value pairs
 var plantObject = {
@@ -21,6 +22,32 @@ var veggieInfoEl = $('#veg-info');
 //hiding the info elemtns initially
 $('#sci-name').hide();
 $('#plant-name').hide();
+
+/* ############################# carousel ####################################*/
+
+$('.main-carousel').slick({
+  centerMode:true,
+  centerPadding: '80px',
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  infinite: true,
+  variableWidth: true,
+  variableHeight: true
+});
+
+/* ############################# const settings ############################# */
+
+const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
+		"x-rapidapi-key": "b71a1c4a5bmshb848c727310c6bbp18da7cjsnbb90f586f1b4"
+	}
+};
+
 $('#sun-requirements').hide();
 $('#row-spacing').hide();
 $('#plant-height').hide();
@@ -41,11 +68,23 @@ function getApi(url) {
       .then(function (data) {
 
         plantData = data.data[0].attributes;
+
+        console.log(data);
         
         displayInfo();
       });
     }
-    
+
+
+
+/* ############################# Zipcode Search ############################# */
+function zipSearch (e) {
+  e.preventDefault();
+  zipcode = $('.searchFieldZip').val();
+  console.log (zipcode)
+  hardiSearch()
+}
+
 /* ############################# plant search ############################# */
   function plantSearch (e) {
    e.preventDefault();
@@ -70,7 +109,7 @@ function getApi(url) {
         plantObject.growHeight = plantData.height;
         //if keys aren't null then we display the data to the page
           if ( plantObject.plantSpace != null) {
-            $('#row-spacing').text('Plant Spacing: ' + plantObject.plantSpace).show(); 
+          $('#row-spacing').text('Plant Spacing: ' + plantObject.plantSpace + ' cm.').show(); 
           }
           if ( plantData.binomial_name != null) {
           $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
@@ -91,7 +130,7 @@ function getApi(url) {
           $('#sowing-method').text('Sowing Method: ' + plantObject.sowMeth + '.').show();
           }
           if ( plantObject.growHeight != null) {
-          $('#plant-height').text('Fully Grown Height: ' + plantObject.growHeight).show();
+          $('#plant-height').text('Fully Grown Height: ' + plantObject.growHeight + ' cm.').show();
           }
           if (plantObject.imageData != null){
           $('#image').attr("src", plantObject.imageData);
@@ -99,7 +138,8 @@ function getApi(url) {
         }
 /* ############################# hardiness zones ############################# */
 function hardiSearch() {
-  var input = $('.searchField').val();
+  var input = $('.searchFieldZip').val();
+  console.log (input)
   const settings = {
     "async": true,
     "crossDomain": true,
@@ -112,9 +152,12 @@ function hardiSearch() {
   };
   $.ajax(settings).done(function (response) {
     console.log(response.hardiness_zone);
-    // $('#details-head').text(response.hardiness_zone)
+    document.createElement("p")
+    $('#details-head').text(response.hardiness_zone)
   });
 }
   
 srchBtn.on('click', plantSearch);
-/* ############################# carousel ##################################### */
+
+srchBtnZip.on('click', hardiSearch);
+
