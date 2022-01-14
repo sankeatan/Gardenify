@@ -117,4 +117,4 @@ function hardiSearch() {
 }
   
 srchBtn.on('click', plantSearch);
-
+/* ############################# carousel ##################################### */

@@ -137,6 +137,19 @@ h6 {
   left: 51.875rem;
 }
 
+.card {
+  position: relative;
+  bottom: 37rem;
+  left: 93rem;
+  background-color:rgba(10, 8, 8, 0.151);
+  color: rgba(255, 255, 255, 0.644)
+}
+
+.card-divider {
+  background-color: rgba(10, 8, 8, 0.795);
+  color: rgba(255, 255, 255, 0.644)
+}
+
 * {box-sizing:border-box}
 
 /* Slideshow container */
