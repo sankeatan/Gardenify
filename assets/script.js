@@ -7,21 +7,31 @@ var srchBtn =  $('.searchBt');
 var searchValue = $('.searchField').val();
 //plant object with empty key:value pairs
 var plantObject = {
-   imageData : "",
-   plantDesc : "",
-   sunReq : "",
-   sowMeth : "",
-   plantSpace : "",
-   growHeight : ""
+  imageData : "",
+  plantDesc : "",
+  sunReq : "",
+  sowMeth : "",
+  plantSpace : "",
+  growHeight : ""
 };
 //empty global array to dump data
 var weatherData = [];
 var plantData = [];
 //selector for the info element
 var veggieInfoEl = $('#veg-info');
+
 //hiding the info elemtns initially
 $('#sci-name').hide();
 $('#plant-name').hide();
+$('#sun-requirements').hide();
+$('#row-spacing').hide();
+$('#plant-height').hide();
+$('#sowing-method').hide();
+$('#current-temp').hide();
+$('#current-icon').hide();
+$('#hardiness').hide();
+$('#humid').hide();
+$('#pop-card').hide();
 
 /* ############################# carousel ####################################*/
 
@@ -35,10 +45,6 @@ $('.main-carousel').slick({
   variableHeight: true
 });
 
-$('#sun-requirements').hide();
-$('#row-spacing').hide();
-$('#plant-height').hide();
-$('#sowing-method').hide();
 
 /* ############################# getting plant info ############################# */
 function getPlantApi(plantName) {
@@ -137,8 +143,8 @@ function zipInfo(zipCode) {
   };
   $.ajax(settings).done(function (response) {
     console.log(response.hardiness_zone);
-    document.createElement("p")
-    $('#details-head').text(response.hardiness_zone)
+    $('#hardiness').text(response.hardiness_zone).show();
+
   });
 
   //open weather fetch
@@ -174,8 +180,16 @@ function zipInfo(zipCode) {
           //saves the weather data to global array
           weatherData = data;
           console.log(weatherData);
+
+          $('#current-icon').attr('src', 'http://openweathermap.org/img/wn/'+weatherData.current.weather[0].icon+'@2x.png').show();
+          $('#current-temp').text("Temp: " +weatherData.current.temp+"\xB0F").show();
+          $('#humid').text("Humidity: "+ weatherData.current.humidity+"%").show();
+          $('#pop-card').show();
+
           })
       });
 }
+
+
 srchBtn.on('click', search);
 
