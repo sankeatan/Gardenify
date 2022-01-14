@@ -10,6 +10,18 @@ var plantDesc = "";
 $('#sci-name').hide();
 $('#plant-name').hide();
 
+/* ############################# carousel ####################################*/
+
+$('.main-carousel').slick({
+  centerMode:true,
+  centerPadding: '80px',
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  infinite: true,
+  variableWidth: true,
+  variableHeight: true
+});
+
 /* ############################# const settings ############################# */
 
 const settings = {
