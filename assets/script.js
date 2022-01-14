@@ -21,6 +21,32 @@ var veggieInfoEl = $('#veg-info');
 //hiding the info elemtns initially
 $('#sci-name').hide();
 $('#plant-name').hide();
+
+/* ############################# carousel ####################################*/
+
+$('.main-carousel').slick({
+  centerMode:true,
+  centerPadding: '80px',
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  infinite: true,
+  variableWidth: true,
+  variableHeight: true
+});
+
+/* ############################# const settings ############################# */
+
+const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
+		"x-rapidapi-key": "b71a1c4a5bmshb848c727310c6bbp18da7cjsnbb90f586f1b4"
+	}
+};
+
 $('#sun-requirements').hide();
 $('#row-spacing').hide();
 $('#plant-height').hide();
