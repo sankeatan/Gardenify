@@ -143,7 +143,7 @@ function zipInfo(zipCode) {
   };
   $.ajax(settings).done(function (response) {
     console.log(response.hardiness_zone);
-    $('#hardiness').text(response.hardiness_zone).show();
+    $('#hardiness').text("Hardiness Zone: " + response.hardiness_zone).show();
 
   });
 
