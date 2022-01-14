@@ -158,5 +158,6 @@ function hardiSearch() {
 }
   
 srchBtn.on('click', plantSearch);
+
 srchBtnZip.on('click', hardiSearch);
 
