@@ -41,6 +41,8 @@ function getApi(url) {
       .then(function (data) {
 
         plantData = data.data[0].attributes;
+
+        console.log(data);
         
         displayInfo();
       });
@@ -70,7 +72,7 @@ function getApi(url) {
         plantObject.growHeight = plantData.height;
         //if keys aren't null then we display the data to the page
           if ( plantObject.plantSpace != null) {
-            $('#row-spacing').text('Plant Spacing: ' + plantObject.plantSpace).show(); 
+          $('#row-spacing').text('Plant Spacing: ' + plantObject.plantSpace + ' cm.').show(); 
           }
           if ( plantData.binomial_name != null) {
           $('#sci-name').text('Scientific Name: '+ plantData.binomial_name).show();
@@ -91,7 +93,7 @@ function getApi(url) {
           $('#sowing-method').text('Sowing Method: ' + plantObject.sowMeth + '.').show();
           }
           if ( plantObject.growHeight != null) {
-          $('#plant-height').text('Fully Grown Height: ' + plantObject.growHeight).show();
+          $('#plant-height').text('Fully Grown Height: ' + plantObject.growHeight + ' cm.').show();
           }
           if (plantObject.imageData != null){
           $('#image').attr("src", plantObject.imageData);
