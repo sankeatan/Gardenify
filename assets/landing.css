@@ -1,0 +1,48 @@
+body {
+    width: 100%;
+    height: -webkit-fill-available;
+    min-height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.637), rgba(0, 0, 0, 0.637)), url(./gardenlanding);
+    background-size: cover;
+    background-position-x: center;
+   }
+
+.jumbotron {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.986);
+    position: relative;
+    top: 250px;
+    text-shadow:
+    0.07em 0 black,
+    0 0.07em black,
+    -0.07em 0 black,
+    0 -0.07em black;
+}
+
+.display-4 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 75px;
+}
+
+.lead {
+    text-align: center;
+    color:rgba(255, 255, 255, 0.911)
+}
+
+.input-group, input-group-rounded {
+    width: 300px;
+    position: relative;
+    left: 760px;
+    top: 20px;
+    border-radius: 312.5rem 0 0 312.5rem
+}
+
+.my4 {
+    width: 10%;
+}
+
+.input-group-field {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
