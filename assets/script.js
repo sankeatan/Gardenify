@@ -28,7 +28,97 @@ var secondCar = [];
 var thirdCar = [];
 var fourthCar = [];
 var fifthCar = [];
-var frostData = [];
+
+var frostDates = {
+  '1a': {
+    lastFrost: 'May 27th - June 4th',
+    firstFrost: 'August 25th - 31st'
+  },
+  '1b': {
+    lastFrost: 'May 22nd - May 29th',
+    firstFrost: 'August 25th - 31st'
+  },
+  '2a': {
+    lastFrost: 'May 18th - 22nd',
+    firstFrost: 'September 1st - 5th'
+  },
+  '2b': {
+    lastFrost: 'May 15th - 20th',
+    firstFrost: 'September 4th - 8th'
+  },
+  '3a': {
+    lastFrost: 'May 8th - 16th',
+    firstFrost: 'September 8th - 12th'
+  },
+  '3b': {
+    lastFrost:  'May 1st - 10th',
+    firstFrost: 'September 10th - 15th'
+  },
+  '4a': {
+    lastFrost: 'April 31st - May 12th',
+    firstFrost: 'September 21st - October 1st'
+  },
+  '4b': {
+    lastFrost: 'April 24th - May 5th',
+    firstFrost: 'September 27th - October 7th'
+  },
+  '5a': {
+    lastFrost:  'April 15th - 30th',
+    firstFrost: 'October 13th - October 17th'
+  },
+  '5b': {
+    lastFrost:  'April 7th - 21st',
+    firstFrost: 'October 15th - October 21st'
+  },
+  '6a': {
+    lastFrost:  'April 12th - 21st',
+    firstFrost: 'October 17th - 25th'
+  },
+  '6b': {
+    lastFrost:  'April 1st - 15th',
+    firstFrost: 'October 21st - 31st'
+  },
+  '7a': {
+    lastFrost:  'March 26th - April 3rd',
+    firstFrost: 'October 29th - November 5th'
+  },
+  '7b': {
+    lastFrost:  'March 22nd - March 28th',
+    firstFrost: 'November 3rd - November 15th'
+  },
+  '8a': {
+    lastFrost:  'March 17th - 28th',
+    firstFrost: 'November 7th - 16th'
+  },
+  '8b': {
+    lastFrost:  'March 13th - 21st',
+    firstFrost: 'November 14th - 28th'
+  },
+  '9a': {
+    lastFrost:  'February 20th - 28th',
+    firstFrost: 'November 25th - December 5th'
+  },
+  '9b': {
+    lastFrost:  'February 6th - 21st',
+    firstFrost: 'December 1st - December 13th'
+  },
+  '10': {
+    lastFrost: 'No freeze!',
+    firstFrost: 'No freeze!'
+  },
+  '11': {
+    lastFrost: 'No freeze!',
+    firstFrost: 'No freeze!'
+  },
+  '12': {
+    lastFrost: 'No freeze!',
+    firstFrost: 'No freeze!'
+  },
+  '13': {
+    lastFrost: 'No freeze!',
+    firstFrost: 'No freeze!'
+  }
+};
 //selector for the info element
 var veggieInfoEl = $('#veg-info');
 
@@ -89,9 +179,9 @@ function getPlantApi(plantName) {
       .then(function (data) {
 
         plantData = data.data[0].attributes;
-        firstCar = data.data[1].attributes.main_image_path;
-        secondCar = data.data[2].attributes.main_image_path;
-        //thirdCar = data.data[3].attributes.main_image_path;
+        firstCar = data.data[0].attributes.main_image_path;
+        secondCar = data.data[1].attributes.main_image_path;
+        thirdCar = data.data[2].attributes.main_image_path;
         //fourthCar = data.data[4].attributes.main_image_path;
         //fifthCar = data.data[5].attributes.main_image_path;
 
@@ -127,7 +217,6 @@ function getPlantApi(plantName) {
         plantObject.imageData = plantData.main_image_path;
         plantObject.plantDesc = plantData.description;
         plantObject.sunReq = plantData.sun_requirements;
-        console.log(plantData.sun_requirements);
         plantObject.sowMeth = plantData.sowing_method;
         plantObject.plantSpace = plantData.row_spacing;
         plantObject.growHeight = plantData.height;
@@ -171,6 +260,7 @@ function getPlantApi(plantName) {
 /* ############################# getting zip info ############################# */
 function zipInfo(zipCode) {
   //hardiness zone fetch
+  determineFrostDates('5a');
   const settings = {
     "async": true,
     "crossDomain": true,
@@ -183,8 +273,6 @@ function zipInfo(zipCode) {
   };
   $.ajax(settings).done(function (response) {
     console.log(response.hardiness_zone);
-    $('#hardiness').text("Hardiness Zone: " + response.hardiness_zone).show();
-
   });
   //geocode and open weather fetch
   var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip='+zipCode+'&appid='+openWeatherApiKey;
@@ -212,31 +300,17 @@ function zipInfo(zipCode) {
         //uses lat and long to call for weather info
 
         //function to determine the frost dates
-        
       });
 }
 /* ############################# determine frost dates ############################# */
-function determineFrostDates (lattitude, longitude){
-  var minMonthlyData = [];
-  for (var i=1; i<13; i++) {
-  var minMonthlyTempUrl = 'https://history.openweathermap.org/data/2.5/temperature/month?month='+i+'&lat='+lattitude+'&lon='+longitude+'&appid='+openWeatherApiKey;
-  fetch(minMonthlyTempUrl, {
-    method: 'GET', //GET is the default.
-    credentials: 'same-origin', // include, *same-origin, omit
-    redirect: 'follow', // manual, *follow, error
-    })
-    .then(function (response) {
-      //checking response before returing
-      if (response.status == 200) {
-      return response.json();
-      }
-      })
-    .then(function (data) {
-      //saves the geocode to a global array, and then sets the lat and long of the city
-      minMonthlyData = data;
-      console.log(minMonthlyData);
-      })
-}
+function determineFrostDates (hardinessZone){
+  var hardi = hardinessZone
+  $('#hardiness').text("Hardiness Zone: " + hardi).show();
+  $('#first-frost').text("Historical First Frosts: " + frostDates[hardi].firstFrost).show();
+  console.log(frostDates[hardi].firstFrost);
+  $('#last-frost').text("Historical Last Frosts: " + frostDates[hardi].lastFrost).show();
+  console.log(frostDates[hardi].lastFrost);
+  $('#pop-card').show();
 }
 /* ############################# set current weaather ############################# */
 function setCurrentWeather (lattitude, longitude){
