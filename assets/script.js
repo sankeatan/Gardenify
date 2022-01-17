@@ -22,6 +22,11 @@ var plantObject = {
 //empty global array to dump data
 var weatherData = [];
 var plantData = [];
+var firstCar = [];
+var secondCar = [];
+var thirdCar = [];
+var fourthCar = [];
+var fifthCar = [];
 var frostData = [];
 //selector for the info element
 var veggieInfoEl = $('#veg-info');
@@ -82,6 +87,11 @@ function getPlantApi(plantName) {
       .then(function (data) {
 
         plantData = data.data[0].attributes;
+        firstCar = data.data[1].attributes.main_image_path;
+        secondCar = data.data[2].attributes.main_image_path;
+        thirdCar = data.data[3].attributes.main_image_path;
+        fourthCar = data.data[4].attributes.main_image_path;
+        fifthCar = data.data[5].attributes.main_image_path;
 
         console.log(data);
         
@@ -119,6 +129,14 @@ function getPlantApi(plantName) {
         plantObject.sowMeth = plantData.sowing_method;
         plantObject.plantSpace = plantData.row_spacing;
         plantObject.growHeight = plantData.height;
+        //populating carousel images//
+        
+        $('#first-car').attr("src", firstCar);
+        $('#second-car').attr("src", secondCar);
+        $('#third-car').attr("src", thirdCar);
+        $('#fourth-car').attr("src", fourthCar);
+        $('#fifth-car').attr("src", fifthCar);
+        
         //if keys aren't null then we display the data to the page
           if ( plantObject.plantSpace != null) {
           $('#row-spacing').text('Plant Spacing: ' + plantObject.plantSpace + ' cm.').show(); 
