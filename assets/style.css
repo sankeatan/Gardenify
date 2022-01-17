@@ -266,4 +266,35 @@ img{
 
 .slider{
   margin-top: 10px;
+  
+}
+
+#first-car {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#second-car {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#third-car {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#fourth-car {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#fifth-car {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
 }
