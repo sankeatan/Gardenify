@@ -2,6 +2,7 @@
 
 //empty global request url
 var requestURL = '';
+var openWeatherApiKey='4c94f4694462733770c73418781b71f1';
 //search button and input field selectors
 var srchBtn =  $('.searchBt');
 var searchValue = $('.searchField').val();
@@ -76,7 +77,7 @@ $('.slider').slick({
 
 /* ############################# getting plant info ############################# */
 function getPlantApi(plantName) {
-    var url = 'https://cors-anywhere.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
+    var url = 'https://floating-headland-95050.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
     fetch(url)
       .then(function (response) {
         console.log(response.status);
@@ -90,9 +91,9 @@ function getPlantApi(plantName) {
         plantData = data.data[0].attributes;
         firstCar = data.data[1].attributes.main_image_path;
         secondCar = data.data[2].attributes.main_image_path;
-        thirdCar = data.data[3].attributes.main_image_path;
-        fourthCar = data.data[4].attributes.main_image_path;
-        fifthCar = data.data[5].attributes.main_image_path;
+        //thirdCar = data.data[3].attributes.main_image_path;
+        //fourthCar = data.data[4].attributes.main_image_path;
+        //fifthCar = data.data[5].attributes.main_image_path;
 
         console.log(data);
         
@@ -169,7 +170,6 @@ function getPlantApi(plantName) {
         }
 /* ############################# getting zip info ############################# */
 function zipInfo(zipCode) {
-
   //hardiness zone fetch
   const settings = {
     "async": true,
@@ -186,7 +186,6 @@ function zipInfo(zipCode) {
     $('#hardiness').text("Hardiness Zone: " + response.hardiness_zone).show();
 
   });
-
   //geocode and open weather fetch
   var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip='+zipCode+'&appid='+openWeatherApiKey;
   var lat = 0;

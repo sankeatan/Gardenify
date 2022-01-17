@@ -3,7 +3,7 @@ $(".searchBt").on('click', function () {
     if ($('.searchField').val()==''){
         alert("Please enter a plant to search");
     } else {
-    sessionStorage.setItem('landingSearch', $('.searchBt').val());
+    sessionStorage.setItem('landingSearch', $('.searchField').val());
     location.href = "main-page.html";
     }
 });
