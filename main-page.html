@@ -1,101 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/style.css">
-    <title>Gardening</title>
-    <link rel="icon" type="image/x-icon" href="assets/logo_color.png">
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./assets/slick-1.8.1/slick/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="./assets/slick-1.8.1/slick/slick.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/style.css">
+  <title>Gardening</title>
+  <link rel="icon" type="image/x-icon" href="assets/logo_color.png">
 </head>
 
-
-<body>
-  <header id="header" class="topbar-sticky-shrink-header">
-  </header>
-  <div class="top-bar foundation-5-top-bar">
-    <div class="top-bar-title">
-      </span>
-      <h1 class="site-name">Gardenify</h1>
-      <h6>Veggies For Everyone</h6>
-    </div>
-    <div class="input-group input-group-rounded">
-      <input class="input-group-field searchField" type="search">
-      <div class="input-group-button">
-        <input type="submit" class="button secondary searchBt" value="Search">
-      </div>
-    </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  <div class="work-feature-block row custom-row">
-    <div class="columns medium-7">
-      <img class="work-feature-block-image" id="image" src="" />
-    </div>
-    <div class="columns medium-5">
-      <h2 class="work-feature-block-header" id="plant-title">Project Description</h2>
-      <ul id="veg-info">
-        <li id="sci-name"></li>
-        <li id="plant-name"></li>
-        <li id="sowing-method"></li>
-        <li id="sun-requirement"></li>
-        <li id="row-spacing"></li>
-        <li id="plant-height"></li>
-      </ul>
-      <div class="work-details-row'">
-        <h2 id="details-head">Description</h2>
-        <p id="details-p"></p>
-        <div id="app"></div>
-      </div>
-    </div>
-    <div class="card" style="width: 300px;" id="pop-card">
-      <div class="card-divider">
-        <h4>Current Weather Data</h4>
-      </div>
-      <div class="card-section">
-        <ul>
-          <li id="current-icon"></li>
-          <li id="current-temp"></li>
-          <li id="humid"></li>
-          <li id="hardiness"></li>
-        </ul>
-      </div>
-    </div>
-    <main>
-    
-
-    <footer>
-      <div class="marketing-site-footer-bottom">
-        <div class="row large-unstack align-middle">
-          <div class="column custom-copyright">
-            <p>&copy; 2022 No rights reserved</p>
-          </div>
-          <div class="column">
-            <ul class="menu marketing-site-footer-bottom-links">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Works</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-
+<body style="
+  display: flex;
+  flex-direction: column;
+  ">
+  <main>
+     <div class="main-style">
+     <div class="top-bar foundation-5-top-bar" style="display: flex;">
+        <div class="top-bar-title">
+           <h1 class="site-name">Gardenify</h1>
+           <h6>Veggies For Everyone</h6>
         </div>
-      </div>
-    </div>
-  </footer>
-</body>
+        <div class="input-group input-group-rounded">
+           <input class="input-group-field searchField" type="search">
+           <div class="input-group-button">
+              <input type="submit" class="button secondary searchBt" value="Search">
+           </div>
+        </div>
+     </div>
+     <div style="
+display: flex;
+flex-direction: row;
+">
+        <div style="
+display: flex;
+flex-direction: column;
+padding: 24px;
+">
+          <div class="pixels">
+           <img id="image" src="">
+           <div class="slider">
+            <div><img id="image" src="./assets/frog.jpg"></div>
+            <div><img id="image" src="./assets/frog2.jpg"></div>
+            <div><img id="image" src="./assets/frog3.jpeg"></div>
+            <div><img id="image" src="./assets/frog4.jpg"></div>
+            <div><img id="image" src="./assets/frogs5.jpg"></div>
+           </div>
+           </div>
+        </div>
+        <div class="work-feature-block" style="
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           flex-direction: column;
+           ">
+           <div class="work-feature-block-container">
+              <h2 class="work-feature-block-header" id="plant-title"></h2>
+              <ul id="veg-info">
+                 <li id="sci-name"></li>
+                 <li id="plant-name"></li>
+                 <li id="sowing-method"></li>
+                 <li id="sun-requirement" style="display: none;"></li>
+                 <li id="row-spacing" style="display: none;"></li>
+                 <li id="plant-height"></li>
+              </ul>
+              <div class="work-details-row" style="
+display: flex;
+flex-direction: column;
+">
+                 <h2 id="details-head"></h2>
+                 <p id="details-p"></p>
+              </div>
+              
+           </div>
+          
+        </div>
+        <div class="card" id="pop-card">
+          <div class="card-divider">
+             <h4>Current Weather Data</h4>
+          </div>
+          <div class="card-section">
+             <ul>
+                <li id="current-icon" src="http://openweathermap.org/img/wn/02n@2x.png"></li>
+                <li id="current-temp">Temp: 58.08°F</li>
+                <li id="humid">Humidity: 82%</li>
+                <li id="hardiness">Hardiness Zone: 9b</li>
+             </ul>
+          </div>
+       </div>
+       <footer style="
+              width: 100%;
+              position: fixed;
+              bottom: 0;
+              ">
+              <div class="marketing-site-footer-bottom">
+                 <div class="row large-unstack align-middle">
+                    <div class="column custom-copyright">
+                       <p>© 2022 No rights reserved</p>
+                    </div>
+                    <div class="column">
+                    </div>
+                 </div>
+              </div>
+           </footer>
+     </div>
+  </div></main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+  <script type="text/javascript" src="./assets/slick-1.8.1/slick/slick.min.js"></script>
+  <script src="./assets/script.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-<script src="./assets/script.js"></script>
 
-</html>
-
+</body></html>

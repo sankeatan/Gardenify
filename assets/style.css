@@ -4,6 +4,18 @@
 
 body {
     background-color: rgba(230, 213, 182, 0.966);
+    width: 100%;
+}
+
+.work-feature-block-container {
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.body-style {
+  display: flex;
+  flex-direction: column;
 }
 
 .button {
@@ -13,6 +25,10 @@ body {
 .top-bar {
     background-color: rgba(35, 80, 43, 0.562);
     height: 7.5rem;
+}
+
+.top-bar, foundation-5-top-bar {
+  display:flex;
 }
 
 .top-bar-title {
@@ -46,11 +62,11 @@ h6 {
   
   .marketing-site-footer-bottom {
     background-color: rgba(26, 14, 5, 0.541);
-    padding: 1rem 0;
-    position:absolute;
-    bottom: -1rem;
+    padding-bottom: 69px;
+    position: fixed;
+    bottom: 0;
     width:100%;
-    height: 6.938rem;
+    height: 3.938rem;
     border-top: 0.063rem solid#cacaca;
   }
   
@@ -98,6 +114,11 @@ h6 {
     padding: 0.625rem 0;
     border-top: 0.063rem solid #cacaca;
     border-bottom: 0.063rem solid #cacaca;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    padding-right: 20px;
   }
   
 .work-feature-block-image {
@@ -107,10 +128,10 @@ h6 {
   }
   
 .work-feature-block-header {
-    position:relative;
     left: 53.125rem;
     bottom: 21.875rem;
     width: 25rem;
+    align-self: center;
 }
 
 .custom-row {
@@ -119,38 +140,37 @@ h6 {
 
 
 .work-feature-block-image {
-    position: relative;
     right: 38.75rem;
     top: 3.125rem;
     width: 31.25rem;
 }
 
 #details-head {
-    position:relative;
     left: 51.875rem;
     bottom: 21.875rem;
     width: 25rem;
 }
 
 #details-p {
-    position:relative;
     left: 40.625rem;
     bottom: 21.875rem;
     width: 46.875rem;
 }
 
 #veg-info {
-  position: relative;
   bottom: 22rem;
   left: 40.5rem;
 }
 
 .card {
-  position: relative;
   bottom: 52.2rem;
   left: 93rem;
   background-color:rgba(10, 8, 8, 0.151);
   color: black;
+  width: 200px;
+  margin-top: 55px; 
+  margin-bottom: 300px; 
+  margin-right: 110px; 
 }
 
 .card-divider {
@@ -220,8 +240,11 @@ h6 {
 }
 
 img{
-  margin:auto;
+  width: 500px;
+}
 
+.pixels{
+  width: 500px;
 }
 
 .slick-current img{
@@ -241,6 +264,6 @@ img{
   padding: 5px;
 }
 
-.slider img{
-  margin: 0 auto;
+.slider{
+  margin-top: 10px;
 }
