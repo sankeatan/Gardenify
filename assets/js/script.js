@@ -5,10 +5,6 @@ var requestURL = '';
 //search button and input field selectors
 var srchBtn =  $('.searchBt');
 var searchValue = $('.searchField').val();
-//weather card id hooks and default
-var temperature = $('#current-temp');
-temperature.text("Temp: \xB0F");
-var currentIcon = $('#current-icon');
 
 //plant object with empty key:value pairs
 var plantObject = {
@@ -23,6 +19,8 @@ var plantObject = {
 var weatherData = [];
 var plantData = [];
 var frostData = [];
+//whelp
+var openWeatherApiKey='4c94f4694462733770c73418781b71f1';
 //selector for the info element
 var veggieInfoEl = $('#veg-info');
 
@@ -50,6 +48,8 @@ $('.main-carousel').slick({
   variableWidth: true,
   variableHeight: true
 });
+
+getPlantApi(sessionStorage.getItem('landingSearch'));
 
 /* ############################# getting plant info ############################# */
 function getPlantApi(plantName) {
@@ -133,7 +133,6 @@ function getPlantApi(plantName) {
         }
 /* ############################# getting zip info ############################# */
 function zipInfo(zipCode) {
-  var openWeatherApiKey='4c94f4694462733770c73418781b71f1';
 
   //hardiness zone fetch
   const settings = {
@@ -152,10 +151,11 @@ function zipInfo(zipCode) {
 
   });
 
-  //geocode and open weather fetch, then temperature stations fetch
+  //geocode and open weather fetch
   var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip='+zipCode+'&appid='+openWeatherApiKey;
   var lat = 0;
   var long = 0;
+  //geocode fetch for lat and long based on zipcode
   fetch(geocodeUrl, {
       method: 'GET', //GET is the default.
       credentials: 'same-origin', // include, *same-origin, omit
@@ -173,70 +173,64 @@ function zipInfo(zipCode) {
         console.log(geocodeData);
         lat = geocodeData.lat;
         long = geocodeData.lon;
-
+        setCurrentWeather (lat, long);
         //uses lat and long to call for weather info
-        var weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+long+'&units=imperial&appid='+ openWeatherApiKey;
-        fetch(weatherUrl, {
-        method: 'GET', //GET is the default.
-        credentials: 'same-origin', // include, *same-origin, omit
-        redirect: 'follow', // manual, *follow, error
-          })
-          .then(function (response) {
-          return response.json();
-          })
-          .then(function (data) {
-          //saves the weather data to global array
-          weatherData = data;
-          console.log(weatherData);
 
-          $('#current-icon').attr('src', 'http://openweathermap.org/img/wn/'+weatherData.current.weather[0].icon+'@2x.png').show();
-          $('#current-temp').text("Temp: " +weatherData.current.temp+"\xB0F").show();
-          $('#humid').text("Humidity: "+ weatherData.current.humidity+"%").show();
-          $('#pop-card').show();
-
-          })
+        //function to determine the frost dates
         
-          //getting temperature stations for frost dates
-        var tempStationUrl = 'https://api.farmsense.net/v1/frostdates/stations/?lat='+lat+'&lon='+long;
-        tempStationsData = [];
-        fetch(tempStationUrl, {
-          method: 'GET', //GET is the default.
-          credentials: 'same-origin', // include, *same-origin, omit
-          redirect: 'follow', // manual, *follow, error
-          })
-            .then(function (response) {
-              if (response.status == 200) {
-              return response.json();
-              }})
-            .then(function (data) {
-            var tempStationsData = data;
-            console.log(tempStationsData);
-            var stationID = tempStationsData[0].id;
-            var frostDatesUrl = 'https://api.farmsense.net/v1/frostdates/probabilities/?station='+stationID+'&season=1';
-            fetch(frostDatesUrl, {
-              method: 'GET', //GET is the default.
-              credentials: 'same-origin', // include, *same-origin, omit
-              redirect: 'follow', // manual, *follow, error
-            })
-              .then(function (response) {
-              if (response.status == 200) {
-              return response.json();
-              }})
-              .then(function (data) {
-              frostData = data;
-              console.log(frostData);
-              console.log(frostData[0].prob_90);
-            })
-  });
-})
+      });
 }
-
+/* ############################# determine frost dates ############################# */
+function determineFrostDates (lattitude, longitude){
+  var minMonthlyData = [];
+  for (var i=1; i<13; i++) {
+  var minMonthlyTempUrl = 'https://history.openweathermap.org/data/2.5/temperature/month?month='+i+'&lat='+lattitude+'&lon='+longitude+'&appid='+openWeatherApiKey;
+  fetch(minMonthlyTempUrl, {
+    method: 'GET', //GET is the default.
+    credentials: 'same-origin', // include, *same-origin, omit
+    redirect: 'follow', // manual, *follow, error
+    })
+    .then(function (response) {
+      //checking response before returing
+      if (response.status == 200) {
+      return response.json();
+      }
+      })
+    .then(function (data) {
+      //saves the geocode to a global array, and then sets the lat and long of the city
+      minMonthlyData = data;
+      console.log(minMonthlyData);
+      })
+}
+}
+/* ############################# set current weaather ############################# */
+function setCurrentWeather (lattitude, longitude){
+  var weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lattitude+'&lon='+longitude+'&units=imperial&appid='+ openWeatherApiKey;
+  fetch(weatherUrl, {
+    method: 'GET', //GET is the default.
+    credentials: 'same-origin', // include, *same-origin, omit
+    redirect: 'follow', // manual, *follow, error
+      })
+    .then(function (response) {
+      return response.json();
+      })
+    .then(function (data) {
+    //saves the weather data to global array
+      weatherData = data;
+      console.log(weatherData);
+      //displaying icon, temperature, humidity
+      $('#current-icon').attr('src', 'http://openweathermap.org/img/wn/'+weatherData.current.weather[0].icon+'@2x.png').show();
+      $('#current-temp').text("Temp: " +weatherData.current.temp+"\xB0F").show();
+      $('#humid').text("Humidity: "+ weatherData.current.humidity+"%").show();
+      $('#pop-card').show();
+        })
+  }
 srchBtn.on('click', search);
+
 $(document).on('keypress',function(e) {
   console.log('keypress');
   if(e.which == 13) {
       srchBtn.trigger('click');
       console.log('enter');
   }
-})
-
+});
