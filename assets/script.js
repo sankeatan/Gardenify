@@ -11,6 +11,8 @@ var temperature = $('#current-temp');
 temperature.text("Temp: \xB0F");
 var currentIcon = $('#current-icon');
 
+var carouselImgs = $('.slider');
+
 //plant object with empty key:value pairs
 var plantObject = {
   imageData : "",
@@ -23,12 +25,26 @@ var plantObject = {
 //empty global array to dump data
 var weatherData = [];
 var plantData = [];
-var firstCar = [];
-var secondCar = [];
-var thirdCar = [];
-var fourthCar = [];
-var fifthCar = [];
 
+var defaultImages = {
+  0 : {
+    name: 'pepper',
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/54ffd16c31343500038c0200.?1426051424'},
+  1 : {
+    name: 'tomato',
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/5dc3618ef2c1020004f936e4.jpg?1573085580'},
+  2 : {
+    name: 'cucumber',
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/576b7843fe8d750003000305.jpg?1466660929'},
+  3 : {
+    name: 'sunflower',
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/550c827f3730310003ea0000.jpg?1426883198'},
+  4 : {
+    name: 'carrot',
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/58c312395865650004000000.jpg?1489179191'}
+  };
+
+//object that contains a list of potential first and last frost dates depending on their hardiness zone
 var frostDates = {
   '1a': {
     lastFrost: 'May 27th - June 4th',
@@ -137,6 +153,7 @@ $('#pop-card').hide();
 
 //pulling data from landing page search
 getPlantApi(sessionStorage.getItem('landingSearch'));
+generateDefaultImages();
 
 /* ############################# carousel ####################################*/
 $('.slider').slick({
@@ -165,12 +182,19 @@ $('.slider').slick({
   ]
 });
 
+function generateDefaultImages(){
+  $('#0-card').attr("src", defaultImages[0].url).val(defaultImages[0].name);
+  $('#1-card').attr("src", defaultImages[1].url).val(defaultImages[1].name);
+  $('#2-card').attr("stc", defaultImages[2].url).val(defaultImages[2].name);
+  $('#3-card').attr("src", defaultImages[3].url).val(defaultImages[3].name);
+  $('#4-card').attr("src", defaultImages[4].url).val(defaultImages[4].name);
+}
+
 /* ############################# getting plant info ############################# */
 function getPlantApi(plantName) {
     var url = 'https://floating-headland-95050.herokuapp.com/https://openfarm.cc/api/v1/crops/?filter='+plantName;
     fetch(url)
       .then(function (response) {
-        console.log(response.status);
         if (response.status !== 200) {
           responseText.textContent = response.status;
         }
@@ -178,14 +202,8 @@ function getPlantApi(plantName) {
       })
       .then(function (data) {
 
-        plantData = data.data[0].attributes;
-        firstCar = data.data[0].attributes.main_image_path;
-        secondCar = data.data[1].attributes.main_image_path;
-        thirdCar = data.data[2].attributes.main_image_path;
-        //fourthCar = data.data[4].attributes.main_image_path;
-        //fifthCar = data.data[5].attributes.main_image_path;
+       plantData = data.data[0].attributes;
 
-        console.log(data);
         
         displayPlantInfo();
       });
@@ -197,10 +215,9 @@ function getPlantApi(plantName) {
   searchValue = $('.searchField').val();
   //checks to see if search field is a number
   if (!isNaN(searchValue)) {
-  //checks to see if the search field is less than 5 characters
+  //if it is a number it checks to see if the search field is less than 5 characters
     if (searchValue.length>5){
-      //**************** need to put a zip warning here ***************
-      return false;
+      alert('Please enter a plant name or your zipcode for more gardening information');
     }
     //searchs for zip info
     else {
@@ -220,13 +237,7 @@ function getPlantApi(plantName) {
         plantObject.sowMeth = plantData.sowing_method;
         plantObject.plantSpace = plantData.row_spacing;
         plantObject.growHeight = plantData.height;
-        //populating carousel images//
-        
-        $('#first-car').attr("src", firstCar);
-        $('#second-car').attr("src", secondCar);
-        $('#third-car').attr("src", thirdCar);
-        $('#fourth-car').attr("src", fourthCar);
-        $('#fifth-car').attr("src", fifthCar);
+  
         
         //if keys aren't null then we display the data to the page
           if ( plantObject.plantSpace != null) {
@@ -337,10 +348,15 @@ function setCurrentWeather (lattitude, longitude){
 srchBtn.on('click', search);
 
 $(document).on('keypress',function(e) {
-  console.log('keypress');
   if(e.which == 13) {
       srchBtn.trigger('click');
-      console.log('enter');
   }
 });
+
+carouselImgs.on('click','img', function (e){
+  $('.searchField').val($(this).val());
+  console.log($(this).val());
+  console.log($('.searchField').val());
+  srchBtn.trigger('click');
+})
 
