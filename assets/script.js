@@ -149,6 +149,8 @@ $('#current-temp').hide();
 $('#hardiness').hide();
 $('#humid').hide();
 $('#pop-card').hide();
+$('#first-frost').hide();
+$('#last-frost').hide();
 
 //pulling data from landing page search
 getPlantApi(sessionStorage.getItem('landingSearch'));
