@@ -1,13 +1,22 @@
 # Project-1
 
-#Acceptance Criteria
-GIVEN – a Planting/Gardening Guide
-WHEN - user searches a specific plant name.
-THEN - user is given detailed data about the plant.
-WHEN - user can search their specific zipcode.
-THEN - user is given the hardiness level for their zipcode.
---If Possible--
-WHEN - user is able to click a save plant button.
-THEN - user will be directed to a second html page that will save their garden list.
-WHEN - the user is able to save a garden list for a specific season. 
-THEN - the user will be able to easily pull up any saved season and easily edit them as needed.
+#Gardenify - Plant info and garden tips.
+
+#Description
+A place to search info about plants you are wanting to plant and current weather and other info relating to plant health.
+If you want to know your hardiness zone, last frost dates and more you can search your zip code in the top right search bar.
+
+#Screenshots
+(Gardenify\assets\Screenshot 2022-01-18 094351.png)
+(Gardenify\assets\Screenshot 2022-01-18 094445.png)
+
+#How to use
+Input name of plant you are wanting to grow in search bar. 
+Alternativly, you can click an image in the image carosel.
+Input zip code into same search bar to know current weather data and hardiness zone.
+
+#Contributers
+https://github.com/dmcarver01611
+https://github.com/sankeatan
+https://github.com/Hank5050
+https://github.com/Wngartman
