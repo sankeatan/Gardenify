@@ -270,11 +270,11 @@ function getPlantApi(plantName) {
 /* ############################# getting zip info ############################# */
 function zipInfo(zipCode) {
   //hardiness zone fetch
-  determineFrostDates('5a');
+  
   const settings = {
     "async": true,
     "crossDomain": true,
-    "url": "https://cors-anywhere.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/" + zipCode,
+    "url": "https://floating-headland-95050.herokuapp.com/https://plant-hardiness-zone.p.rapidapi.com/zipcodes/" + zipCode,
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "plant-hardiness-zone.p.rapidapi.com",
@@ -283,6 +283,7 @@ function zipInfo(zipCode) {
   };
   $.ajax(settings).done(function (response) {
     console.log(response.hardiness_zone);
+    determineFrostDates(response.hardiness_zone);
   });
   //geocode and open weather fetch
   var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip='+zipCode+'&appid='+openWeatherApiKey;
