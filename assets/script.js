@@ -34,8 +34,8 @@ var defaultImages = {
     name: 'tomato',
     url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/5dc3618ef2c1020004f936e4.jpg?1573085580'},
   2 : {
-    name: 'cucumber',
-    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/58c312395865650004000000.jpg?1489179191'},
+    name: 'strawberry',
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/551dc6103732390003730100.jpg?1428014606'},
   3 : {
     name: 'broccoli',
     url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/54b4b5ea61306500020b0000.jpg?1421129190'},
