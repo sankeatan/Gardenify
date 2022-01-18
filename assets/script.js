@@ -184,7 +184,7 @@ $('.slider').slick({
 function generateDefaultImages(){
   $('#0-card').attr("src", defaultImages[0].url).val(defaultImages[0].name);
   $('#1-card').attr("src", defaultImages[1].url).val(defaultImages[1].name);
-  $('#2-card').attr("stc", defaultImages[2].url).val(defaultImages[2].name);
+  $('#2-card').attr("src", defaultImages[2].url).val(defaultImages[2].name);
   $('#3-card').attr("src", defaultImages[3].url).val(defaultImages[3].name);
   $('#4-card').attr("src", defaultImages[4].url).val(defaultImages[4].name);
 }
