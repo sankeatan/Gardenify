@@ -35,10 +35,10 @@ var defaultImages = {
     url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/5dc3618ef2c1020004f936e4.jpg?1573085580'},
   2 : {
     name: 'cucumber',
-    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/576b7843fe8d750003000305.jpg?1466660929'},
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/58c312395865650004000000.jpg?1489179191'},
   3 : {
-    name: 'sunflower',
-    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/550c827f3730310003ea0000.jpg?1426883198'},
+    name: 'broccoli',
+    url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/54b4b5ea61306500020b0000.jpg?1421129190'},
   4 : {
     name: 'carrot',
     url: 'https://s3.amazonaws.com/openfarm-project/production/media/pictures/attachments/58c312395865650004000000.jpg?1489179191'}
