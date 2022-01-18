@@ -146,7 +146,6 @@ $('#row-spacing').hide();
 $('#plant-height').hide();
 $('#sowing-method').hide();
 $('#current-temp').hide();
-$('#current-icon').hide();
 $('#hardiness').hide();
 $('#humid').hide();
 $('#pop-card').hide();
@@ -339,7 +338,6 @@ function setCurrentWeather (lattitude, longitude){
       weatherData = data;
       console.log(weatherData);
       //displaying icon, temperature, humidity
-      $('#current-icon').attr('src', 'http://openweathermap.org/img/wn/'+weatherData.current.weather[0].icon+'@2x.png').show();
       $('#current-temp').text("Temp: " +weatherData.current.temp+"\xB0F").show();
       $('#humid').text("Humidity: "+ weatherData.current.humidity+"%").show();
       $('#pop-card').show();

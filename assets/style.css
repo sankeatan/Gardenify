@@ -269,31 +269,31 @@ img{
   
 }
 
-#first-car {
+.card-one {
   width:  100px;
   height: 100px;
   object-fit: cover;
 }
 
-#second-car {
+.card-two {
   width:  100px;
   height: 100px;
   object-fit: cover;
 }
 
-#third-car {
+.card-three{
   width:  100px;
   height: 100px;
   object-fit: cover;
 }
 
-#fourth-car {
+.card-four {
   width:  100px;
   height: 100px;
   object-fit: cover;
 }
 
-#fifth-car {
+.card-five {
   width:  100px;
   height: 100px;
   object-fit: cover;
